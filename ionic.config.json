@@ -1,0 +1,7 @@
+{
+  "name": "cloudpictures",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
