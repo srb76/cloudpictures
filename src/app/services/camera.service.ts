@@ -10,6 +10,7 @@ const {Camera, Filesystem, Storage} = Plugins;
 export class CameraService {
 
   public photos: Photo[] = [];
+  private PHOTO_STORAGE: string="photos";
 
   constructor() { }
 
@@ -21,9 +22,20 @@ export class CameraService {
       quality: 100
     });
 
-    //save photo
+    //save photo to filesystem and add to array
     const savedImage = await this.savePhoto(newPhoto);
     this.photos.unshift(savedImage);
+
+    //save key to photo
+    Storage.set({
+      key: this.PHOTO_STORAGE,
+      value: JSON.stringify(this.photos.map(p => {
+        const photoCopy = {...p};
+        delete photoCopy.base64;
+
+        return photoCopy;
+      }))
+    });
 
     //add photo to Photos array
     /*
@@ -68,6 +80,21 @@ export class CameraService {
     };
     reader.readAsDataURL(blob);
   });
+
+  public async loadSavedPhotos(){
+    const photos = await Storage.get({key: this.PHOTO_STORAGE});
+    this.photos = JSON.parse(photos.value) || [];
+
+    //read photo into base64
+    for(let photo of this.photos){
+      const readFile = await Filesystem.readFile({
+        path: photo.filepath,
+        directory: FilesystemDirectory.Data
+      });
+
+      photo.base64 = 'data:image/jpeg;base64,${readFile.data}';
+    }
+  }
 }
 
 interface Photo{
