@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {CameraService} from '../services/camera.service';
 
 @Component({
   selector: 'app-upload',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UploadPage implements OnInit {
 
-  constructor() { }
+  constructor(public cameraService: CameraService) { }
 
   ngOnInit() {
   }
