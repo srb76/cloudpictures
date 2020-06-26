@@ -14,7 +14,7 @@
   </ion-header>
 
   <div id="container">
-  <ion-button color="secondary" (click)="onClickUploadPhoto()">
+  <ion-button color="secondary" [routerLink]="['/upload']">
     <ion-icon name="camera"></ion-icon> 
     <ion-label>{{buttonText}}</ion-label>
   </ion-button>

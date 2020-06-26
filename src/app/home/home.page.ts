@@ -9,7 +9,7 @@ export class HomePage {
 
   constructor() {}
 
-  buttonText = 'Tap here to upload a photo!';
+  buttonText = 'Upload Photo';
 
   onClickUploadPhoto(){
     this.buttonText = 'You pressed it! Good job!';
