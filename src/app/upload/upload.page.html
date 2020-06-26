@@ -20,6 +20,13 @@
     <ion-icon name="camera"></ion-icon>
     <ion-label>Add Photo or Take Photo</ion-label>
   </ion-button>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6" *ngFor="let photo of cameraService.photos; index as position">
+        <ion-img src="{{photo.webviewPath}}"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 
 <ion-footer>
