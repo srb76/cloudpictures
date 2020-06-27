@@ -8,9 +8,10 @@ import {CameraService} from '../services/camera.service';
 })
 export class GalleryPage implements OnInit {
 
-  constructor() { }
+  constructor(public cameraService: CameraService) { }
 
   ngOnInit() {
+    this.cameraService.loadSavedPhotos();
   }
 
 }
